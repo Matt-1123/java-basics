@@ -17,7 +17,13 @@ public class HelloWorld {
         Integer i = 0;
         for (i=0; i<employees.size(); i++) {
             Integer hoursWorked = (Integer)employees.get(i);
-            wages = hourlyRate * hoursWorked;
+            if(hoursWorked < 10){
+                wages = hoursWorked * hourlyRate + 5;
+            } else if(hoursWorked >= 10 && hoursWorked <= 30){
+                wages = hoursWorked * hourlyRate + 10;
+            } else{
+                wages = hoursWorked * hourlyRate + 20;
+            }
             System.out.println("Employee " + (i+1) + " wages for the week are $" + wages);
         }
     }
