@@ -6,39 +6,38 @@ public class HelloWorld {
         System.out.println("WAGES");
 
         class Employee {
-            Integer hoursWorked;         
-            String name;
-            Integer age;
-
+            Integer mHoursWorked;         
+            String mName;
+            Integer mAge;
+            Integer mWages;
 
             void print() {
-                System.out.println( "\nName = " + name );
-                System.out.println( "Age = " + age );
-                System.out.println( "Hours Worked = " + hoursWorked );
+                System.out.println( "\nName = " + mName );
+                System.out.println( "Age = " + mAge );
+                System.out.println( "Hours Worked = " + mHoursWorked );
             }
             
-            Integer calculateWages(Integer hoursWorked) {
-                Integer wages = 0;
-
+            void calculateWages() {
                 Integer hourlyRate = 10;
 
                 print();
 
-                Integer bonusPay = bonusCalculation(hoursWorked);
+                Integer bonusPay = bonusCalculation();
             
-                wages = hourlyRate * hoursWorked + bonusPay;
-                    System.out.println( "Wages = " + wages );
+                mWages = hourlyRate * mHoursWorked + bonusPay;
+                System.out.println( "Wages = " + mWages );
 
-                return wages;
+                //return wages;
+                // no need to return wages b/c it's a member variable now
             }
 
-            Integer bonusCalculation(Integer hoursWorked) {
+            Integer bonusCalculation() {
                 Integer bonus = 0;
 
-                if (hoursWorked < 10)
+                if (mHoursWorked < 10)
                     bonus = 5;
             else 
-                if (hoursWorked < 30)
+                if (mHoursWorked < 30)
                 bonus = 10;
                 else
                 bonus = 20;
@@ -50,19 +49,19 @@ public class HelloWorld {
 
 
         Employee richard = new Employee();
-        richard.name = "Richard";
-        richard.age = 35;
-        richard.hoursWorked = 24;
+        richard.mName = "Richard";
+        richard.mAge = 35;
+        richard.mHoursWorked = 24;
 
         Employee david = new Employee();
-        david.name = "David";
-        david.age = 47;
-        david.hoursWorked = 4;
+        david.mName = "David";
+        david.mAge = 47;
+        david.mHoursWorked = 4;
 
         Employee susan = new Employee();
-        susan.name = "Susan";
-        susan.age = 22;
-        susan.hoursWorked = 40;
+        susan.mName = "Susan";
+        susan.mAge = 22;
+        susan.mHoursWorked = 40;
 
         ArrayList employees = new ArrayList<Employee>();
         employees.add(richard);
@@ -77,7 +76,8 @@ public class HelloWorld {
         for (idx=0; idx<employees.size();idx++) {
             Employee worker = (Employee)employees.get(idx); 
 
-            wages = worker.calculateWages(worker.hoursWorked);
+            worker.calculateWages();
+            System.out.println( "Your wages are : " + worker.mWages );
         }
     }
 }
