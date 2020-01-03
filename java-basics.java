@@ -2,45 +2,82 @@ package domain;
 import java.util.*;
 public class HelloWorld {
 
-    public static Integer bonusCalculation(Integer hoursWorked){
-        Integer bonus= 0; //initialize to 0
-        
-        if(hoursWorked < 10){
-            bonus = 5;
-        } else if(hoursWorked < 30){
-            bonus = 10;
-        } else{
-            bonus = 20;
-        }
-        
-        return bonus;
-    }
-    
-    public static Integer calculateWages(Integer hoursWorked){
-        Integer wages = 0;
-        Integer hourlyRate = 10;
-        System.out.println("Hourly rate = " + hourlyRate);
-        
-        Integer bonus = bonusCalculation(hoursWorked);
-        
-        wages = hourlyRate * hoursWorked + bonus;
-        
-        return wages;
-    }
-        
-    public static void main(String[] args){    
-        ArrayList employees = new ArrayList<Integer>();
-        employees.add(24);
-        employees.add(4);
-        employees.add(40);
-        
-        Integer i = 0;
-        for (i=0; i<employees.size(); i++) {
-            Integer hoursWorked = (Integer)employees.get(i);
-            Integer wages = calculateWages(hoursWorked);
-            
-            System.out.println("Employee " + (i+1) + " wages for the week are $" + wages);
-        }
-    }
+    public static void main(String[] args) {
+        System.out.println("WAGES");
 
+        class Employee {
+            Integer hoursWorked;         
+            String name;
+            Integer age;
+
+
+            void print() {
+                System.out.println( "\nName = " + name );
+                System.out.println( "Age = " + age );
+                System.out.println( "Hours Worked = " + hoursWorked );
+            }
+            
+            Integer calculateWages(Integer hoursWorked) {
+                Integer wages = 0;
+
+                Integer hourlyRate = 10;
+
+                print();
+
+                Integer bonusPay = bonusCalculation(hoursWorked);
+            
+                wages = hourlyRate * hoursWorked + bonusPay;
+                    System.out.println( "Wages = " + wages );
+
+                return wages;
+            }
+
+            Integer bonusCalculation(Integer hoursWorked) {
+                Integer bonus = 0;
+
+                if (hoursWorked < 10)
+                    bonus = 5;
+            else 
+                if (hoursWorked < 30)
+                bonus = 10;
+                else
+                bonus = 20;
+
+            System.out.println( "Bonus Pay = " + bonus );
+            return bonus;
+            }
+        };
+
+
+        Employee richard = new Employee();
+        richard.name = "Richard";
+        richard.age = 35;
+        richard.hoursWorked = 24;
+
+        Employee david = new Employee();
+        david.name = "David";
+        david.age = 47;
+        david.hoursWorked = 4;
+
+        Employee susan = new Employee();
+        susan.name = "Susan";
+        susan.age = 22;
+        susan.hoursWorked = 40;
+
+        ArrayList employees = new ArrayList<Employee>();
+        employees.add(richard);
+        employees.add(david);
+        employees.add(susan);
+        
+        Integer wages;
+        
+        System.out.println( "Number of employees = " + employees.size() );
+
+        Integer idx;
+        for (idx=0; idx<employees.size();idx++) {
+            Employee worker = (Employee)employees.get(idx); 
+
+            wages = worker.calculateWages(worker.hoursWorked);
+        }
+    }
 }
